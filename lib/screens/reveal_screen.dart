@@ -14,7 +14,7 @@ class RevealScreen extends StatelessWidget {
       return 'assets/images/undercover.png';
     }
 
-    // детерминированный "рандом": стабильно выбирает M/W для игрока
+    // random pics of male and female citizens
     final h = (p.name.hashCode + index * 9973).abs() % 2;
     return (h == 0)
         ? 'assets/images/citizen_w.png'
@@ -79,7 +79,6 @@ class RevealScreen extends StatelessWidget {
                                 .textTheme
                                 .headlineSmall
                                 ?.copyWith(
-                                  // бледно-красный для Undercover, голубоватый для Citizen
                                   color: p.role!
                                           .toString()
                                           .contains('undercover')
@@ -108,7 +107,7 @@ class RevealScreen extends StatelessWidget {
               ),
             ),
 
-            // Центральная зона: Show или аватар
+            // Center zone, avatar
             Expanded(
               child: Center(
                 child: !isVisible
@@ -131,7 +130,7 @@ class RevealScreen extends StatelessWidget {
               ),
             ),
 
-            // Next (внизу)
+            // Next button at the bottom
             SizedBox(
               height: 48,
               width: double.infinity,

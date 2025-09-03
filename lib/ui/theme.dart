@@ -9,33 +9,53 @@ ThemeData buildAppTheme() {
   );
 
   return base.copyWith(
-    scaffoldBackgroundColor: Colors.transparent, // фон даёт картинка
-    appBarTheme: AppBarTheme(
-      backgroundColor: Colors.transparent,       // без белой «полосы»
+    scaffoldBackgroundColor: Colors.transparent,
+
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
       elevation: 0,
-      scrolledUnderElevation: 0,                 // не затемнять при скролле
+      scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
-      foregroundColor: const Color.fromARGB(255, 249, 249, 249),
-      systemOverlayStyle: const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark, // тёмные иконки в статус-баре
-        statusBarBrightness: Brightness.light,
-      ),
       centerTitle: true,
+      foregroundColor: Colors.black,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: Colors.transparent,
+      ),
     ),
+
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: const Color(0xFFE3F2FD).withValues(alpha: 0.92),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(14),
-        borderSide: BorderSide.none,
-      ),
+      fillColor: Colors.black.withValues(alpha: 0.4), // dark background
+      hintStyle: const TextStyle(color: Colors.white70), // hint light
       contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      hintStyle: const TextStyle(color: Colors.black54),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: const BorderSide(color: Colors.white70, width: 1.5),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(14),
+        borderSide: const BorderSide(color: Colors.white, width: 2),
+      ),
     ),
+
+    textTheme: base.textTheme.apply(
+      bodyColor: Colors.white,
+      displayColor: Colors.white,
+    ),
+
+    textSelectionTheme: const TextSelectionThemeData(
+        cursorColor: Colors.white,
+        selectionColor: Color(0x80FFFFFF),
+        selectionHandleColor: Colors.white70,
+    ),
+
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 70, 109, 216).withValues(alpha: 0.92),
+        backgroundColor:
+            const Color.fromARGB(255, 70, 109, 216).withValues(alpha: 0.92),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         minimumSize: const Size.fromHeight(48),

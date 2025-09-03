@@ -117,7 +117,7 @@ class GameController extends ChangeNotifier {
     }
 
     if (leaders.isEmpty || leaders.length > 1) {
-      state.eliminatedIndexThisRound = null; // ничья
+      state.eliminatedIndexThisRound = null;
     } else {
       final elim = leaders.first;
       state.players[elim].eliminated = true;

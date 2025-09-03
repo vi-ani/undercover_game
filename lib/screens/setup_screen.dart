@@ -119,13 +119,16 @@ class _SetupScreenState extends State<SetupScreen> {
                     padding: const EdgeInsets.symmetric(vertical: 6),
                     child: TextField(
                       controller: _controllers[i],
-                      style: const TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.white),
                       decoration: const InputDecoration(
-                        hintText: "Player's name",
+                        labelText: "Player's name",
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
                       ),
+                      textInputAction: TextInputAction.next,
                     ),
                   );
                 }),
+
 
                 const SizedBox(height: 16),
 

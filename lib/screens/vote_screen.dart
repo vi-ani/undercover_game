@@ -61,7 +61,6 @@ class VoteScreen extends StatelessWidget {
                         horizontal: 12, vertical: 10),
                       child: Row(
                         children: [
-                          // Текстовая часть занимает доступное пространство
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +78,6 @@ class VoteScreen extends StatelessWidget {
 
                           const SizedBox(width: 12),
 
-                          // Кнопка фиксированного размера, чтобы не расползалась
                           SizedBox(
                             height: 40,
                             width: 96,

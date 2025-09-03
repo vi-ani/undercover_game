@@ -77,7 +77,7 @@ class GameOverScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // --- список игроков и их ролей ---
+            // --- list of players ---
             Expanded(
               child: ListView(
                 children: [
