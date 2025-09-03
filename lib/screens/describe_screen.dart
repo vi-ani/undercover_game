@@ -21,7 +21,7 @@ class DescribeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Round ${controller.state.round}',
+              'Description phase — Round ${controller.state.round}',
               style: Theme.of(context)
                   .textTheme
                   .headlineSmall
@@ -38,8 +38,8 @@ class DescribeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Text(
-                  'Description phase: each player gives a short description of their word (without saying it directly). '
-                  'After everyone finishes — proceed to voting.',
+                  'Now each player gives a short description of their word (without saying it directly). '
+                  'After everyone finishes - proceed to voting.',
                   style: Theme.of(context)
                       .textTheme
                       .bodyLarge

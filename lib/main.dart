@@ -78,9 +78,19 @@ class _GameRootState extends State<GameRoot> {
         }
 
         return Scaffold(
-          appBar: AppBar(title: const Text('Undercover Game')),
+          extendBodyBehindAppBar: true, // фон будет подниматься под AppBar
+          appBar: AppBar(
+            backgroundColor: Colors.transparent, // прозрачный фон
+            elevation: 0, // без тени
+            title: const Text(
+              'Undercover Game',
+              style: TextStyle(color: Colors.black), // текст чёрный
+            ),
+            centerTitle: true,
+          ),
           body: SafeArea(child: body),
         );
+
       },
     );
   }

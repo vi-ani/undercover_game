@@ -6,6 +6,21 @@ class RevealScreen extends StatelessWidget {
   const RevealScreen({super.key, required this.controller});
   final GameController controller;
 
+  String _avatarPathFor(int index) {
+    final p = controller.state.players[index];
+    final isUndercover = p.role.toString().contains('undercover');
+
+    if (isUndercover) {
+      return 'assets/images/undercover.png';
+    }
+
+    // детерминированный "рандом": стабильно выбирает M/W для игрока
+    final h = (p.name.hashCode + index * 9973).abs() % 2;
+    return (h == 0)
+        ? 'assets/images/citizen_w.png'
+        : 'assets/images/citizen_m.png';
+  }
+
   @override
   Widget build(BuildContext context) {
     final i = controller.state.revealIndex;
@@ -13,7 +28,7 @@ class RevealScreen extends StatelessWidget {
     final isVisible = controller.state.revealVisible;
 
     return AppBackground(
-      imagePath: 'assets/images/bg_pattern.png', 
+      imagePath: 'assets/images/bg_pattern.png',
       repeat: true,
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -27,8 +42,10 @@ class RevealScreen extends StatelessWidget {
                   ?.copyWith(color: Colors.white),
             ),
             const SizedBox(height: 24),
+
+            // Role card
             Card(
-              color: Colors.white.withValues(alpha: 0.1),
+              color: Colors.white.withValues(alpha: 0.10),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 250),
                 padding: const EdgeInsets.all(16),
@@ -39,7 +56,10 @@ class RevealScreen extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .titleMedium
-                          ?.copyWith(color: Colors.white),
+                          ?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
                     ),
                     const SizedBox(height: 12),
                     if (!isVisible)
@@ -58,7 +78,14 @@ class RevealScreen extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall
-                                ?.copyWith(color: Colors.amberAccent),
+                                ?.copyWith(
+                                  // бледно-красный для Undercover, голубоватый для Citizen
+                                  color: p.role!
+                                          .toString()
+                                          .contains('undercover')
+                                      ? const Color.fromARGB(255, 255, 120, 120)
+                                      : Colors.lightBlueAccent,
+                                ),
                           ),
                           const SizedBox(height: 8),
                           Text(
@@ -80,29 +107,69 @@ class RevealScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: controller.toggleReveal,
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.white70),
-                    ),
-                    child: Text(isVisible ? 'Hide' : 'Show'),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: FilledButton(
-                    onPressed: isVisible ? controller.nextReveal : null,
-                    child: const Text('Next'),
-                  ),
-                ),
-              ],
-            )
+
+            // Центральная зона: Show или аватар
+            Expanded(
+              child: Center(
+                child: !isVisible
+                    ? SizedBox(
+                        width: 180,
+                        height: 48,
+                        child: OutlinedButton(
+                          onPressed: controller.toggleReveal,
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            side: const BorderSide(color: Colors.white70),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(24),
+                            ),
+                          ),
+                          child: const Text('Show'),
+                        ),
+                      )
+                    : _AvatarCircle(path: _avatarPathFor(i)),
+              ),
+            ),
+
+            // Next (внизу)
+            SizedBox(
+              height: 48,
+              width: double.infinity,
+              child: FilledButton(
+                onPressed: isVisible ? controller.nextReveal : null,
+                child: const Text('Next'),
+              ),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _AvatarCircle extends StatelessWidget {
+  const _AvatarCircle({required this.path});
+
+  final String path;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 280,
+      height: 280,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.55), // pale frame
+          width: 4,
+        ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: ClipOval(
+        child: Image.asset(
+          path,
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
         ),
       ),
     );

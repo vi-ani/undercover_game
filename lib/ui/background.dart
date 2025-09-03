@@ -6,7 +6,7 @@ class AppBackground extends StatelessWidget {
     required this.child,
     this.imagePath = 'assets/images/spy_bg.png',
     this.repeat = false,
-    this.overlayAlpha = 0.35, // fading overlay
+    this.overlayAlpha = 0.35,
   });
 
   final Widget child;
@@ -25,14 +25,14 @@ class AppBackground extends StatelessWidget {
                     image: DecorationImage(
                       image: AssetImage(imagePath),
                       repeat: ImageRepeat.repeat,
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topCenter,
                     ),
                   ),
                 )
               : Image.asset(
                   imagePath,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
+                  fit: BoxFit.cover,   
+                  alignment: Alignment.topCenter,
                 ),
         ),
         Positioned.fill(

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 ThemeData buildAppTheme() {
   final base = ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: const Color(0xFF1565C0), // сине-голубая палитра
+    colorSchemeSeed: const Color.fromARGB(255, 70, 109, 216),
     brightness: Brightness.light,
   );
 
@@ -15,7 +15,7 @@ ThemeData buildAppTheme() {
       elevation: 0,
       scrolledUnderElevation: 0,                 // не затемнять при скролле
       surfaceTintColor: Colors.transparent,
-      foregroundColor: Colors.black,             // заголовок чёрным
+      foregroundColor: const Color.fromARGB(255, 249, 249, 249),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarIconBrightness: Brightness.dark, // тёмные иконки в статус-баре
@@ -35,7 +35,7 @@ ThemeData buildAppTheme() {
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        backgroundColor: const Color(0xFF2962FF).withValues(alpha: 0.92),
+        backgroundColor: const Color.fromARGB(255, 70, 109, 216).withValues(alpha: 0.92),
         foregroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         minimumSize: const Size.fromHeight(48),

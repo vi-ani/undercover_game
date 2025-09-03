@@ -8,15 +8,14 @@ class VoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Собираем актуальные «живые» индексы и игроков
-    final aliveIdx = controller.state.aliveIndexes;
     final players = controller.state.players;
+    final aliveIdx = controller.state.aliveIndexes;
 
-    // Безопасно определяем текущего голосующего
+    // Safe voter index/name
     int voterIndex = controller.state.votingTurnIndex;
     if (voterIndex < 0 ||
         voterIndex >= players.length ||
-        (players.isNotEmpty && players[voterIndex].eliminated)) {
+        (voterIndex >= 0 && players[voterIndex].eliminated)) {
       voterIndex = aliveIdx.isNotEmpty ? aliveIdx.first : -1;
     }
     final voterName = (voterIndex >= 0) ? players[voterIndex].name : '—';
@@ -43,10 +42,10 @@ class VoteScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-            // Список только живых игроков, builder + Expanded — гарантированная компоновка
             Expanded(
-              child: ListView.builder(
+              child: ListView.separated(
                 itemCount: aliveIdx.length,
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
                 itemBuilder: (context, i) {
                   final idx = aliveIdx[i];
                   final p = players[idx];
@@ -57,18 +56,57 @@ class VoteScreen extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: ListTile(
-                      title: Text(p.name, style: const TextStyle(color: Colors.white)),
-                      subtitle: Text('Votes: $votes',
-                          style: const TextStyle(color: Colors.white70)),
-                      trailing: FilledButton(
-                        onPressed: () => controller.castVote(idx),
-                        child: const Text('Vote'),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
+                      child: Row(
+                        children: [
+                          // Текстовая часть занимает доступное пространство
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(p.name,
+                                    style: const TextStyle(
+                                      color: Colors.white, fontSize: 16)),
+                                const SizedBox(height: 2),
+                                Text('Votes: $votes',
+                                    style: const TextStyle(
+                                      color: Colors.white70, fontSize: 12)),
+                              ],
+                            ),
+                          ),
+
+                          const SizedBox(width: 12),
+
+                          // Кнопка фиксированного размера, чтобы не расползалась
+                          SizedBox(
+                            height: 40,
+                            width: 96,
+                            child: FilledButton(
+                              onPressed: () => controller.castVote(idx),
+                              child: const Text('Vote'),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   );
                 },
               ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // Back button
+            OutlinedButton.icon(
+              icon: const Icon(Icons.arrow_back),
+              label: const Text('Back to Description'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.white,
+                side: const BorderSide(color: Colors.white70),
+              ),
+              onPressed: controller.backToDescribe,
             ),
 
             const SizedBox(height: 8),

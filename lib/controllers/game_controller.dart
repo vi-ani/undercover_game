@@ -61,10 +61,14 @@ class GameController extends ChangeNotifier {
   void goToVoting() {
     state.phase = GamePhase.vote;
     state.votingTurnIndex = _findNextVoter(startFrom: -1);
+    if (state.votingTurnIndex < 0 && state.aliveIndexes.isNotEmpty) {
+      state.votingTurnIndex = state.aliveIndexes.first;
+    }
     state.votesTally.clear();
     state.whoVotedFor.clear();
     notifyListeners();
   }
+
 
   int _findNextVoter({required int startFrom}) {
     final n = state.players.length;
@@ -143,4 +147,10 @@ class GameController extends ChangeNotifier {
     state.reset();
     notifyListeners();
   }
+
+  void backToDescribe() {
+    state.phase = GamePhase.describe;
+    notifyListeners();
+  }
+
 }
