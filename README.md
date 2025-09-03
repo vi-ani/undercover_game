@@ -38,3 +38,26 @@ lib/
 │ └── theme.dart # Global theme configuration
 │
 └── main.dart # App entry point
+
+
+## 🕹️ Game Flow
+
+1. **Setup Screen**  
+   Players choose the number of participants (3–12) and enter their names.  
+
+2. **Role Reveal**  
+   Each player secretly checks their role and word.  
+   - Citizens receive similar words.  
+   - The Undercover gets a different word.  
+   - Citizen avatars (male/female) are assigned randomly, the Undercover has a unique avatar.  
+
+3. **Word Description**  
+   One by one, players give short descriptions of their word without naming it directly.  
+
+4. **Voting**  
+   All players vote to eliminate the one they suspect is the Undercover.  
+
+5. **Results & Game Over**  
+   - After voting, players see who was eliminated.  
+   - The game continues until the Undercover is found or only two players remain.  
+   - At the end, the winner is revealed along with all roles and assigned words.  
