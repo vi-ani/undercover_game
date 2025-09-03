@@ -1,16 +1,40 @@
-# undercover_game
+# Undercover Game 🎭
 
-A new Flutter project.
+A party game built with **Flutter**.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 How to Run
+1. Install [Flutter](https://flutter.dev/docs/get-started/install) (3.35+ recommended).  
+2. Clone this repository.  
+3. Fetch dependencies:
+   flutter pub get
+4. Run on an emulator or connected device:
+    flutter run
 
-A few resources to get you started if this is your first Flutter project:
+For the development, I have used emulator Pixel 7, Android 13.0.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📂 App Structure
+lib/
+├── controllers/
+│ └── game_controller.dart # Main game logic and state transitions
+│
+├── models/
+│ ├── enums.dart # Game enums (roles, phases, winner)
+│ ├── game_state.dart # Game state: players, roles, words, phases
+│ ├── player.dart # Player model
+│ └── word_pair.dart # Word pair model
+│
+├── screens/
+│ ├── describe_screen.dart
+│ ├── game_over_screen.dart
+│ ├── results_screen.dart
+│ ├── reveal_screen.dart
+│ ├── setup_screen.dart
+│ └── vote_screen.dart
+│
+├── ui/
+│ ├── background.dart # Background widget with overlay
+│ └── theme.dart # Global theme configuration
+│
+└── main.dart # App entry point
