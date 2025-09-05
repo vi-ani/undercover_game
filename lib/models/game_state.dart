@@ -65,15 +65,15 @@ class GameState {
 
   // Evaluate win conditions
   void evaluateWin() {
-    if (undercoverIndex == null) return;
-    final underAlive = !players[undercoverIndex!].eliminated;
-    final alive = aliveIndexes;
+    if (undercoverIndex == null) return; // safety check
+    final underAlive = !players[undercoverIndex!].eliminated; // is undercover alive?
+    final alive = aliveIndexes; 
     if (!underAlive) {
-      winner = Winner.citizens;
-    } else if (alive.length == 2) {
+      winner = Winner.citizens; // undercover eliminated
+    } else if (alive.length == 2) { // only 2 players left
       winner = Winner.undercover;
     } else {
-      winner = Winner.none;
+      winner = Winner.none; // game goes on
     }
   }
 }

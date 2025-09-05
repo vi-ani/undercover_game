@@ -111,8 +111,8 @@ class GameOverScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 12),
-
-            // --- кнопки управления ---
+            
+            // --- buttons ---
             FilledButton.icon(
               icon: const Icon(Icons.refresh),
               label: const Text('Play Again'),

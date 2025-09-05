@@ -23,9 +23,9 @@ class RevealScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final i = controller.state.revealIndex;
-    final p = controller.state.players[i];
-    final isVisible = controller.state.revealVisible;
+    final i = controller.state.revealIndex; // current player index
+    final p = controller.state.players[i]; // the player
+    final isVisible = controller.state.revealVisible; // is card visible
 
     return AppBackground(
       imagePath: 'assets/images/bg_pattern.png',

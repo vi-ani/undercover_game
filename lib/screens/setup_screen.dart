@@ -10,23 +10,26 @@ class SetupScreen extends StatefulWidget {
   State<SetupScreen> createState() => _SetupScreenState();
 }
 
+// Stateful widget to manage player count and names
 class _SetupScreenState extends State<SetupScreen> {
   int playersCount = 3;
   final List<TextEditingController> _controllers = [];
 
+// Initialize text controllers
   @override
   void initState() {
     super.initState();
     _rebuildControllers();
   }
 
+// Rebuild text controllers when playersCount changes
   void _rebuildControllers() {
     _controllers
       ..clear()
       ..addAll(List.generate(playersCount,
           (i) => TextEditingController(text: '')));
   }
-
+// Dispose controllers to avoid memory leaks
   @override
   void dispose() {
     for (final c in _controllers) {
@@ -35,6 +38,7 @@ class _SetupScreenState extends State<SetupScreen> {
     super.dispose();
   }
 
+// Takes limits from GameState
   @override
   Widget build(BuildContext context) {
     const minP = GameState.minPlayers;
